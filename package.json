@@ -1,0 +1,16 @@
+{
+  "name": "tutor-chrome-bookmarklet",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Students.js",
+  "scripts": {
+    "students": "node Students.js",
+    "copy": "vim studentBookmarklet.js -c %y+"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "xlsx-populate": "^1.16.0"
+  }
+}
