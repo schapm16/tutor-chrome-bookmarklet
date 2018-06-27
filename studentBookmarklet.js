@@ -43,14 +43,22 @@ function sessionDetails() {
   tutorName.value = "Chapman, Stephen";
   tutorName.text = "Chapman, Stephen";
   
-  var inHour = document.querySelectorAll('.quantumWizTextinputPaperinputInput.exportInput[aria-label=Hour]')[0];
-  var outHour = document.querySelectorAll('.quantumWizTextinputPaperinputInput.exportInput[aria-label=Hour]')[1];
-  var inMinute = document.querySelectorAll('.quantumWizTextinputPaperinputInput.exportInput[aria-label=Minute]')[0];
-  var outMinute = document.querySelectorAll('.quantumWizTextinputPaperinputInput.exportInput[aria-label=Minute]')[1];
-  var inAM = document.querySelectorAll('.quantumWizMenuPaperselectOption[data-value=AM]')[0];
-  var outAM = document.querySelectorAll('.quantumWizMenuPaperselectOption[data-value=AM]')[1];
-  var inPM = document.querySelectorAll('.quantumWizMenuPaperselectOption[data-value=PM]')[0];
-  var outPM = document.querySelectorAll('.quantumWizMenuPaperselectOption[data-value=PM]')[1];
+  var Hour = document.querySelectorAll('.quantumWizTextinputPaperinputInput.exportInput[aria-label=Hour]');
+  var inHour = Hour[0];
+  var outHour = Hour[1];
+  
+  var Minute = document.querySelectorAll('.quantumWizTextinputPaperinputInput.exportInput[aria-label=Minute]');
+  var inMinute = Minute[0];
+  var outMinute = Minute[1];
+  
+  var AM = document.querySelectorAll('.quantumWizMenuPaperselectOption[data-value=AM]');
+  var inAM = AM[0];
+  var outAM = AM[1];
+
+  var PM = document.querySelectorAll('.quantumWizMenuPaperselectOption[data-value=PM]');
+  var inPM = PM[0];
+  var outPM = PM[1];
+  
   var clock = JSON.parse(sessionStorage.getItem('clock'));
 
   inHour.value = clock.inTime.hours;
