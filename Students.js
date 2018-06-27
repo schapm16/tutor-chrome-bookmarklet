@@ -19,7 +19,7 @@ function createStudentObject(data) {
 			student[2] = student[2].split(' ');
 			temp = student[2][0];
 
-			student[2][0] = student[2][1];
+			student[2][0] = student[2].splice(1).join(' ');
 			student[2][1] = temp;
 			student[2] = student[2].join(', ');			
 		}
