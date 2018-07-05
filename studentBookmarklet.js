@@ -1,13 +1,50 @@
+/* object of students */
+var students = [
+  /* Student Detail objects are populated here by Students.js */
+  {
+      "name": "",
+      "classCode": "",
+      "email": "",
+      "github": ""
+  } 
+];
+
 var surveyIdentifier = document.querySelector(".freebirdMaterialHeaderbannerPagebreakText");
 var adpIdentifier = document.title;
+var clockingNotesIdentifier = document.getElementById('divClockingWithNotes');
 
 if (adpIdentifier === "ADP") {
-  getClockTimes();
+  if (clockingNotesIdentifier.style.display !== 'none') {
+    clockOutNotes();
+  } else {
+    getClockTimes();
+  }
 } else if(surveyIdentifier) {
   sessionDetails();
 } else {
   studentDetails();
   storeData();
+}
+
+function clockOutNotes() {
+  var myDiv = document.getElementById('dvClockInOutOverlay');
+  var notesTextArea = document.getElementById('txtClockingCustomNote');
+  myDiv.appendChild(createSelectList());
+  var studentSelect = document.getElementById('studentSelect');
+
+  studentSelect.onchange = function() {
+    var studentVal = studentSelect.value;
+
+    for (var i = 0; i < students.length; i++) {
+      if (studentVal === students[i].name) {
+        notesTextArea.value = students[i].classCode + '\r\n' + students[i].name;
+
+        myDiv.removeChild(studentSelect);
+
+        return;
+      }
+    }
+  }
 }
 
 function getClockTimes() {
@@ -92,32 +129,9 @@ function studentDetails() {
   styleWrap.appendChild(styleCode);
   document.body.appendChild(styleWrap);
 
-  /* object of students */
-  var students = [
-    /* Student Detail objects are populated here by Students.js */
-    {
-        "name": "",
-        "classCode": "",
-        "email": "",
-        "github": ""
-    } 
-];
-
   /* grab div and append select */
   var myDiv = document.getElementsByClassName("freebirdFormviewerViewHeaderDescription")[0];
-  var selectList = document.createElement("select");
-  selectList.id = "studentSelect";
-  myDiv.appendChild(selectList);
-  var blank = document.createElement("option");
-  selectList.appendChild(blank);
-
-  /* append student options to select */
-  for (var i = 0; i < students.length; i++) {
-      var option = document.createElement("option");
-      option.value = students[i].name;
-      option.text = students[i].name;
-      selectList.appendChild(option);
-  }
+  myDiv.appendChild(createSelectList());
 
   /* grab input classes and set to variables */
   var inputClass = document.getElementsByClassName("quantumWizTextinputPaperinputInput exportInput");
@@ -128,7 +142,7 @@ function studentDetails() {
 
   /* populate student info */
   function populateStudent() {
-    for (i = 0; i < students.length; i++) {
+    for (var i = 0; i < students.length; i++) {
       var studentVal = document.getElementById('studentSelect').value;
       if (studentVal == students[i].name) {
           studentFirstLast.value = (students[i].name);
@@ -142,4 +156,21 @@ function studentDetails() {
   document.getElementById("studentSelect").onchange = function() {
       populateStudent();
   };
+}
+
+function createSelectList() {
+  var selectList = document.createElement("select");
+  selectList.id = "studentSelect";
+  
+  var blank = document.createElement("option");
+  selectList.appendChild(blank);
+
+  for (var i = 0; i < students.length; i++) {
+      var option = document.createElement("option");
+      option.value = students[i].name;
+      option.text = students[i].name;
+      selectList.appendChild(option);
+  }
+
+  return selectList;
 }
